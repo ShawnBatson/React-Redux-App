@@ -6,8 +6,9 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import { SpellReducer } from "./store/reducers/SpellReducer";
 
-const store = createStore(applyMiddleware(thunk));
+const store = createStore(applyMiddleware(SpellReducer, thunk));
 
 ReactDOM.render(
   <Provider store={store}>

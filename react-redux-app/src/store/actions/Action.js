@@ -8,7 +8,7 @@ export const getSpell = () => dispatch => {
   dispatch({ type: FETCHING_SPELLS_START });
 
   axios
-    .get(`http://dnd5eapi.co/api/spells/${index}`)
+    .get(`http://dnd5eapi.co/api/spells/`)
     .then(res => {
       console.log("res", res);
       dispatch({ type: FETCHING_SPELLS_SUCCESS, payload: res.data });
@@ -16,7 +16,7 @@ export const getSpell = () => dispatch => {
     .catch(err => {
       console.log("err", err);
       dispatch({
-        type: FETCHING_QUOTE_FAILURE,
+        type: FETCHING_SPELLS_FAILURE,
         payload: `${err.response.message} with response code ${err.response.code}`
       });
     });
