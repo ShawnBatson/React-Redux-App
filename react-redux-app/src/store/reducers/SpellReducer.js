@@ -1,4 +1,7 @@
-import { FETCHING_SPELLS_SUCCESS, FETCHING_SPELLS_FAILURE } from "../actions";
+import {
+  FETCHING_SPELLS_SUCCESS,
+  FETCHING_SPELLS_FAILURE
+} from "../actions/Action";
 
 const initialState = {
   _id: "5e10e47a0b1bb138c5b3b6b1",
