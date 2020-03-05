@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import { getSpells } from "../store/actions/Action";
 import "./SpellCard.css";
 
-export const SpellCard = ({ getSpells, isFetching, error }) => {
+export const SpellCard = props => {
   const [spells, setSpells] = useState([]);
-  console.log("this is logged from SpellCard Component");
+  // console.log("this is logged from SpellCard Component", props);
 
-  if (isFetching) {
-    return <h2>Fetching the spell</h2>;
-  }
-
-  const handleChange = event => {
-    console.log("this is in handleChange");
-    setSpells(getSpells);
-  };
+  useEffect(() => {
+    axios
+      .get(`https://cors-anywhere.herokuapp.com/dnd5eapi.co/api/spells/:index`)
+      .then(response => {
+        console.log(
+          "this is in the spellCard Component Axios Call",
+          response.data
+        );
+        setSpells(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div className="topOfThePageContainer">

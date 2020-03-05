@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { SpellCard } from "./Components/SpellCard";
 import { connect } from "react-redux";
 import { getSpells } from "./store/actions/Action";
