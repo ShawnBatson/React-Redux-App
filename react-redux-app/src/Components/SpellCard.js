@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { getSpell } from "../store/actions/Action";
 import { spellReducer } from "../store/reducers/SpellReducer";
+import "./SpellCard.css";
 
 export const SpellCard = ({ getSpell, isFetching, error }) => {
   const [spells, setSpells] = useState([]);
