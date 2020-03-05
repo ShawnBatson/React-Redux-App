@@ -8,7 +8,7 @@ export const getSpell = () => dispatch => {
   dispatch({ type: FETCHING_SPELLS_START });
   console.log(dispatch);
 
-  let axiosCall = axios
+  axios
     .get(`http://dnd5eapi.co/api/spells/`)
     .then(res => {
       let dataDump = res;

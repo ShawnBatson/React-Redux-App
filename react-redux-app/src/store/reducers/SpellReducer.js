@@ -4,6 +4,7 @@ import {
 } from "../actions/Action";
 
 const initialState = {
+  spells: [],
   isFetching: true,
   id: "",
   index: "",
@@ -37,6 +38,7 @@ export const SpellReducer = (state = initialState, action) => {
     case FETCHING_SPELLS_SUCCESS:
       return {
         ...state,
+        spells: action.payload,
         isFetching: false,
         id: action.payload.id,
         index: action.payload.index,
