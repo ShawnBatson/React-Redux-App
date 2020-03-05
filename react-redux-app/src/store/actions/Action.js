@@ -6,8 +6,6 @@ export const FETCHING_SPELLS_FAILURE = "FETCHING_SPELLS_FAILURE";
 
 export const getSpells = () => dispatch => {
   dispatch({ type: FETCHING_SPELLS_START });
-  console.log(dispatch);
-
   axios
     .get(`https://cors-anywhere.herokuapp.com/dnd5eapi.co/api/spells`)
     .then(res => {

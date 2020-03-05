@@ -2,38 +2,59 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { getSpells } from "../store/actions/Action";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./SpellCard.css";
 
 export const SpellCard = props => {
   const [spells, setSpells] = useState([]);
-  // console.log("this is logged from SpellCard Component", props);
 
   useEffect(() => {
-    axios
-      .get(`https://cors-anywhere.herokuapp.com/dnd5eapi.co/api/spells/:index`)
-      .then(response => {
-        console.log(
-          "this is in the spellCard Component Axios Call",
-          response.data
-        );
-        setSpells(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    const getSpellList = () => {
+      axios
+        .get(`https://cors-anywhere.herokuapp.com/dnd5eapi.co/api/spells/`)
+        .then(response => {
+          console.log(
+            "this is in the spellCard Component Axios Call",
+            response.data
+          );
+          setSpells(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
+    getSpellList();
   }, []);
 
   return (
     <div className="topOfThePageContainer">
       <h1 className="title">DnD Spell List</h1>
-      <form>
-        <label htmlFor="Select Spell">
-          <input placeholder="Type Spell Name Here"></input>
-        </label>
-      </form>
+      <div className="spell-list">
+        {spells.map(spell => {
+          <SpellDetails spells={spell} />;
+        })}
+      </div>
     </div>
   );
 };
+
+function SpellDetails({ spellName }) {
+  const { name, id, url } = spellName;
+  return (
+    <Link to={`/spells/${spell.id}`}>
+      <div className="spell-card">
+        <h2>{name}</h2>
+        <p>{id}</p>
+
+        {url.map(spellUrl => (
+          <div key={spellUrl} className="spell-url">
+            {url}
+          </div>
+        ))}
+      </div>
+    </Link>
+  );
+}
 
 const mapStateToProps = state => {
   return {
