@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { SpellReducer } from "./store/reducers/SpellReducer";
 
-const store = createStore(applyMiddleware(SpellReducer, thunk));
+const store = createStore(SpellReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

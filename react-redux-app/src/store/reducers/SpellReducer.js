@@ -1,10 +1,11 @@
 import {
   FETCHING_SPELLS_SUCCESS,
-  FETCHING_SPELLS_FAILURE
+  FETCHING_SPELLS_START
 } from "../actions/Action";
 
 const initialState = {
-  _id: "",
+  isFetching: true,
+  id: "",
   index: "",
   name: "",
   desc: [],
@@ -25,8 +26,33 @@ const initialState = {
 };
 
 export const SpellReducer = (state = initialState, action) => {
-  console.log(initialState);
+  console.log("this is in the top of the SpellReducer");
   switch (action.type) {
+    case FETCHING_SPELLS_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ""
+      };
+    case FETCHING_SPELLS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        id: action.payload.id,
+        index: action.payload.index,
+        name: action.payload.name,
+        desc: [action.payload.desc],
+        higher_level: [action.payload.higher_level],
+        page: action.payload.page,
+        range: action.payload.range,
+        components: [action.payload.components],
+        material: action.payload.material,
+        ritual: action.payload.ritual,
+        duration: action.payload.duration,
+        concentration: action.payload.concentration,
+        casting_time: action.payload.casting_time,
+        level: action.payload.level
+      };
     default:
       return state;
   }

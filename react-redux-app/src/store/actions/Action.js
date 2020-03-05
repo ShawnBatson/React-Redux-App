@@ -6,12 +6,14 @@ export const FETCHING_SPELLS_FAILURE = "FETCHING_SPELLS_FAILURE";
 
 export const getSpell = () => dispatch => {
   dispatch({ type: FETCHING_SPELLS_START });
+  console.log(dispatch);
 
-  axios
+  let axiosCall = axios
     .get(`http://dnd5eapi.co/api/spells/`)
     .then(res => {
-      console.log("res", res);
-      dispatch({ type: FETCHING_SPELLS_SUCCESS, payload: res.data });
+      let dataDump = res;
+      console.log("res", dataDump);
+      dispatch({ type: FETCHING_SPELLS_SUCCESS, payload: dataDump.data });
     })
     .catch(err => {
       console.log("err", err);
