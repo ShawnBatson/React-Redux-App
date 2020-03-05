@@ -14,7 +14,7 @@ function App(props) {
   return (
     <div className="App">
       <h1>DnD Spells</h1>
-      <SpellCard />
+      <Route path="/spells/:id" render={props => <SpellCard {...props} />} />
     </div>
   );
 }

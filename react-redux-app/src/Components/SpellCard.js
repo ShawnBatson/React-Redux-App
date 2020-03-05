@@ -26,35 +26,27 @@ export const SpellCard = props => {
     getSpellList();
   }, []);
 
+  function SpellDetails({ spell }) {
+    return (
+      <Link to={`/spells/${spell.id}`}>
+        <div className="spell-card">
+          <h2>{spell.name}</h2>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <div className="topOfThePageContainer">
       <h1 className="title">DnD Spell List</h1>
       <div className="spell-list">
         {spells.map(spell => {
-          <SpellDetails spells={spell} />;
+          return <SpellDetails key={spells.id} spells={spells} />;
         })}
       </div>
     </div>
   );
 };
-
-function SpellDetails({ spellName }) {
-  const { name, id, url } = spellName;
-  return (
-    <Link to={`/spells/${spell.id}`}>
-      <div className="spell-card">
-        <h2>{name}</h2>
-        <p>{id}</p>
-
-        {url.map(spellUrl => (
-          <div key={spellUrl} className="spell-url">
-            {url}
-          </div>
-        ))}
-      </div>
-    </Link>
-  );
-}
 
 const mapStateToProps = state => {
   return {
