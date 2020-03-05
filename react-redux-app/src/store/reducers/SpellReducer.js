@@ -5,6 +5,7 @@ import {
 
 const initialState = {
   spells: [],
+  spellList: [],
   isFetching: true,
   id: "",
   index: "",

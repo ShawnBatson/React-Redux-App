@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { getSpell } from "../store/actions/Action";
-import { spellReducer } from "../store/reducers/SpellReducer";
+import { getSpells } from "../store/actions/Action";
 import "./SpellCard.css";
 
-export const SpellCard = ({ getSpell, isFetching, error }) => {
+export const SpellCard = ({ getSpells, isFetching, error }) => {
   const [spells, setSpells] = useState([]);
   console.log("this is logged from SpellCard Component");
 
@@ -13,7 +12,8 @@ export const SpellCard = ({ getSpell, isFetching, error }) => {
   }
 
   const handleChange = event => {
-    setSpells(getSpell);
+    console.log("this is in handleChange");
+    setSpells(getSpells);
   };
 
   return (
@@ -21,19 +21,7 @@ export const SpellCard = ({ getSpell, isFetching, error }) => {
       <h1 className="title">DnD Spell List</h1>
       <form>
         <label htmlFor="Select Spell">
-          <select id="spells">
-            <select onChange={handleChange}>
-              {spells &&
-                spells.length > 0 &&
-                spells.map(spell => {
-                  return (
-                    <option key={spell.id} value={spell.name}>
-                      {spell.name}
-                    </option>
-                  );
-                })}
-            </select>
-          </select>
+          <input placeholder="Type Spell Name Here"></input>
         </label>
       </form>
     </div>
@@ -60,4 +48,19 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getSpell })(SpellCard);
+export default connect(mapStateToProps, { getSpells })(SpellCard);
+
+{
+  /* <select onChange={handleChange}>
+  {console.log("this is in the component", spells)}
+  {spells &&
+    spells.length > 0 &&
+    spells.map(spell => {
+      return (
+        <option key={spell.id} value={spell.name}>
+          {spell.name}
+        </option>
+      );
+    })}
+</select>; */
+}

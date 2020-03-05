@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SpellCard } from "./Components/SpellCard";
+import { connect } from "react-redux";
+import { getSpells } from "./store/actions/Action";
 
 import "./App.css";
-import { getSpell } from "./store/actions/Action";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.getSpells();
+  }, []);
+
   return (
     <div className="App">
       <h1>DnD Spells</h1>
@@ -13,4 +18,24 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isFetching: false,
+    id: state.id,
+    index: state.index,
+    name: state.name,
+    desc: [state.desc],
+    higher_level: [state.higher_level],
+    page: state.page,
+    range: state.range,
+    components: [state.components],
+    material: state.material,
+    ritual: state.ritual,
+    duration: state.duration,
+    concentration: state.concentration,
+    casting_time: state.casting_time,
+    level: state.level
+  };
+};
+
+export default connect(mapStateToProps, { getSpells })(App);
