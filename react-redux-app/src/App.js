@@ -18,7 +18,7 @@ function App(props) {
       <Route
         exact
         path="/"
-        // using render here is because it doesn't come from a component. This function will return jsx without a component.
+        // using render here is because it doesn't come from a component. This function will return jsx without a component. \/
         render={() => {
           return props.spells.map(spell => {
             return <Link to={`/spells/${spell.index}`}>{spell.name}</Link>;
