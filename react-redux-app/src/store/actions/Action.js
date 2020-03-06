@@ -13,7 +13,7 @@ export const getSpells = () => dispatch => {
       console.log("res", dataDump);
       dispatch({
         type: FETCHING_SPELLS_SUCCESS,
-        payload: dataDump.spells
+        payload: dataDump
       });
     })
     .catch(err => {

@@ -6,18 +6,20 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./SpellCard.css";
 
 export const SpellCard = props => {
-  const [spells, setSpells] = useState([]);
+  const [spellDetails, setSpellDetails] = useState({});
+  console.log("this is in spellcard props", props);
+  const id = props.match.params.index;
 
   useEffect(() => {
     const getSpellList = () => {
       axios
-        .get(`https://cors-anywhere.herokuapp.com/dnd5eapi.co/api/spells/`)
+        .get(`https://cors-anywhere.herokuapp.com/dnd5eapi.co/api/spells/${id}`)
         .then(response => {
           console.log(
             "this is in the spellCard Component Axios Call",
             response.data
           );
-          setSpells(response.data);
+          setSpellDetails(response.data);
         })
         .catch(error => {
           console.error(error);
@@ -26,30 +28,21 @@ export const SpellCard = props => {
     getSpellList();
   }, []);
 
-  function SpellDetails({ spell }) {
-    return (
-      <Link to={`/spells/${spell.id}`}>
-        <div className="spell-card">
-          <h2>{spell.name}</h2>
-        </div>
-      </Link>
-    );
-  }
-
   return (
     <div className="topOfThePageContainer">
-      <h1 className="title">DnD Spell List</h1>
       <div className="spell-list">
-        {spells.map(spell => {
-          return <SpellDetails key={spells.id} spells={spells} />;
-        })}
+        {/* design this area later */}
+        <h1>{spellDetails.name}</h1>
       </div>
     </div>
   );
 };
 
+// card has it's own local state, there is no need for mapstatetoprops here \/
+
 const mapStateToProps = state => {
   return {
+    spells: [state],
     isFetching: false,
     id: state.id,
     index: state.index,

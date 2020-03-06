@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { SpellCard } from "./Components/SpellCard";
 import { connect } from "react-redux";
 import { getSpells } from "./store/actions/Action";
@@ -11,31 +11,30 @@ function App(props) {
     props.getSpells();
   }, []);
 
+  console.log("this is props.spells in app", props.spells);
   return (
     <div className="App">
       <h1>DnD Spells</h1>
-      <Route path="/spells/:id" render={props => <SpellCard {...props} />} />
+      <Route
+        exact
+        path="/"
+        // using render here is because it doesn't come from a component. This function will return jsx without a component.
+        render={() => {
+          return props.spells.map(spell => {
+            return <Link to={`/spells/${spell.index}`}>{spell.name}</Link>;
+          });
+        }}
+      />
+      {/* \/ this is rendering spell card.  */}
+      <Route exact path="/spells/:index" component={SpellCard}></Route>
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    isFetching: false,
-    id: state.id,
-    index: state.index,
-    name: state.name,
-    desc: [state.desc],
-    higher_level: [state.higher_level],
-    page: state.page,
-    range: state.range,
-    components: [state.components],
-    material: state.material,
-    ritual: state.ritual,
-    duration: state.duration,
-    concentration: state.concentration,
-    casting_time: state.casting_time,
-    level: state.level
+    spells: state.spells,
+    isFetching: state.isFetching
   };
 };
 
