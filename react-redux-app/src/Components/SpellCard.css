@@ -1,0 +1,29 @@
+.topOfThePageContainer {
+  display: flex;
+  background: lightgreen;
+  width: 75%;
+  justify-content: center;
+  border: 1px solid purple;
+  margin-left: 12.5%;
+}
+.title {
+  border: 1px solid black;
+  padding: 2%;
+  margin-right: 10%;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  align-items: center;
+
+  border: 5px solid black;
+}
+#spells {
+  width: 100%;
+}
+
+.spell-list {
+  background: 1px solid red;
+}
